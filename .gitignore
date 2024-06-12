@@ -1,4 +1,4 @@
 /loanamount_env
 /.venv
 /__pycache__
-/mlartifacts/
+/.env
