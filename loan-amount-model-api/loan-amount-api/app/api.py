@@ -6,8 +6,10 @@ import pandas as pd
 from fastapi import APIRouter, HTTPException
 from fastapi.encoders import jsonable_encoder
 from loguru import logger
-from regression import __version__ as model_version
-from regression.predict import make_prediction
+
+
+from loan_amount_model_package.loan_amount_model_package import __version__ as model_version # type: ignore
+from loan_amount_model_package.loan_amount_model_package.predict import make_prediction # type: ignore
 
 from app import __version__, schemas
 from app.config import settings
@@ -21,7 +23,9 @@ def health() -> dict:
     Root Get
     """
     health = schemas.Health(
-        name=settings.PROJECT_NAME, api_version=__version__, model_version=model_version
+        name=settings.PROJECT_NAME, 
+        api_version=__version__, 
+        model_version=model_version
     )
 
     return health.dict()

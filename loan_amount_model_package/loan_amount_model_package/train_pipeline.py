@@ -6,9 +6,9 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import numpy as np
 from loguru import logger
 
-from config.core import config
-from pipeline import loan_amount_pipeline
-from processing.data_manager import load_dataset, save_pipeline
+from loan_amount_model_package.config.core import config
+from loan_amount_model_package.pipeline import loan_amount_pipeline
+from loan_amount_model_package.processing.data_manager import load_dataset, save_pipeline
 from sklearn.model_selection import train_test_split
 
 

@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "loan_amount_model_package"
-version = "0.0.3"
-description = "A package to estimate a predicted loan amount suitable for a customer"
+version = "0.0.4"
+description = "A package to estimate loan amount suitable for a customer"
 authors = ["chibuikeeugene <chibuikeeugene@gmail.com>"]
 readme = "README.md"
 
@@ -19,6 +19,9 @@ ipykernel = "^6.29.4"
 hyperopt = "^0.2.7"
 scipy = "^1.13.1"
 loguru = "^0.7.2"
+fastapi = "^0.111.0"
+uvicorn = "^0.30.1"
+pydantic-settings = "^2.3.3"
 
 
 [tool.poetry.group.dev.dependencies]

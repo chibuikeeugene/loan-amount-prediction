@@ -18,7 +18,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
 
 from loan_amount_model_package.config.core import config
-from processing.preprocessor import Mapper
+from loan_amount_model_package.processing.preprocessor import Mapper
 
 loan_amount_pipeline = Pipeline(
     [

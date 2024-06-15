@@ -1,4 +1,11 @@
+import os,sys
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
+
 from typing import Any
+
+import uvicorn
 
 from fastapi import APIRouter, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -51,8 +58,4 @@ if settings.BACKEND_CORS_ORIGINS:
 
 
 if __name__ == "__main__":
-    # Use this for debugging purposes only
-    logger.warning("Running in development mode. Do not run like this in production.")
-    import uvicorn
-
     uvicorn.run(app, host="localhost", port=8001, log_level="debug")
