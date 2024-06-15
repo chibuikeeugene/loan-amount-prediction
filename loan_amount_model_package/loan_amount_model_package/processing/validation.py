@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from pydantic import BaseModel, ValidationError
 
-from regression.config.core import config
+from loan_amount_model_package.config.core import config
 
 
 # def drop_na_inputs(*, input_data: pd.DataFrame) -> pd.DataFrame:

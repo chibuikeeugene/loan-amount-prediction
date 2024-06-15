@@ -17,7 +17,7 @@ from sklearn.linear_model import LassoCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
 
-from regression.config.core import config
+from loan_amount_model_package.config.core import config
 from processing.preprocessor import Mapper
 
 loan_amount_pipeline = Pipeline(

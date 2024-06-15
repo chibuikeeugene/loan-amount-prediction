@@ -8,10 +8,10 @@ import typing as t
 import numpy as np
 import pandas as pd
 
-from regression import __version__ as _version
-from regression.config.core import config, DATASET_DIR
-from regression.processing.data_manager import load_pipeline
-from regression.processing.validation import validate_inputs
+from loan_amount_model_package import __version__ as _version
+from loan_amount_model_package.config.core import config, DATASET_DIR
+from loan_amount_model_package.processing.data_manager import load_pipeline
+from loan_amount_model_package.processing.validation import validate_inputs
 
 pipeline_file_name = f"{config.app_configs.pipeline_save_file}{_version}.pkl"
 loan_amount_pipeline = load_pipeline(filename=pipeline_file_name)

@@ -5,8 +5,8 @@ import joblib
 import pandas as pd
 from sklearn.pipeline import Pipeline
 
-from regression import __version__ as _version
-from regression.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
+from loan_amount_model_package import __version__ as _version
+from loan_amount_model_package.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
 
 
 def load_dataset(*, filename: str) -> pd.DataFrame:

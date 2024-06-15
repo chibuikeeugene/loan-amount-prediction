@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "loan-amount-prediction"
+name = "loan_amount_model_package"
 version = "0.0.3"
 description = "A package to estimate a predicted loan amount suitable for a customer"
 authors = ["chibuikeeugene <chibuikeeugene@gmail.com>"]
