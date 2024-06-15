@@ -13,12 +13,6 @@ def load_dataset(*, filename: str) -> pd.DataFrame:
     dataframe = pd.read_csv(Path(f"{DATASET_DIR}/{filename}"))
     dataframe.columns = dataframe.columns.str.lower()
 
-    # # drop the ID, gender and loan status columns as they are irrelevant to our modeling
-    # dataframe = dataframe.drop(["loan_id", "gender", "loan_status"], axis=1)
-
-    # # drop records where credit history is not available
-    # dataframe.dropna(subset=["credit_history"], inplace=True)
-
     # converting the credit history variable to categorical
     dataframe["credit_history"] = dataframe["credit_history"].astype("str")
 
@@ -31,7 +25,7 @@ def save_pipeline(*, pipeline_to_persist: Pipeline) -> None:
     """
 
     # prepare versioned save file name
-    save_file_name = f"{config.app_config.pipeline_save_file}{_version}.pkl"
+    save_file_name = f"{config.app_configs.pipeline_save_file}{_version}.pkl"
     save_path = TRAINED_MODEL_DIR / save_file_name
 
     remove_old_pipelines(files_to_keep=[save_file_name])

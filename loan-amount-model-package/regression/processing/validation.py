@@ -7,34 +7,34 @@ from pydantic import BaseModel, ValidationError
 from regression.config.core import config
 
 
-def drop_na_inputs(*, input_data: pd.DataFrame) -> pd.DataFrame:
-    """check model inputs for na values and filter"""
-    validated_data = input_data.copy()
-    new_vars_with_na = [
-        var
-        for var in config.model_config.features
-        if var not in config.model_config.cat_vars_na + config.model_config.num_var_na
-        and validated_data[var].isnull().sum() > 0
-    ]
-    validated_data.dropna(subset=new_vars_with_na, inplace=True)
+# def drop_na_inputs(*, input_data: pd.DataFrame) -> pd.DataFrame:
+#     """check model inputs for na values and filter"""
+#     validated_data = input_data.copy()
+#     new_vars_with_na = [
+#         var
+#         for var in config.model_configs.features
+#         if var not in config.model_configs.cat_vars_na + config.model_configs.num_var_na
+#         and validated_data[var].isnull().sum() > 0
+#     ]
+#     return new_vars_with_na
+#     # validated_data.dropna(subset=new_vars_with_na, inplace=True)
 
-    return validated_data
+#     # return validated_data
 
 
 def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional[dict]]:
     """check model inputs for unprocessable values."""
 
-    # input_data.columns = input_data.columns.str.lower()
+    input_data.columns = input_data.columns.str.lower()
 
-    # # drop the ID, gender and loan status columns as they are irrelevant to our modeling
-    # input = input_data.drop(["loan_id", "gender", "loan_status"], axis=1)
+    validated_data = input_data
 
-    validated_data = drop_na_inputs(input_data=input_data)
+    # validated_data = drop_na_inputs(input_data=input_data)
 
-    # # converting the credit history variable to categorical
-    # validated_data["credit_history"] = validated_data["credit_history"].astype("str")
+    # converting the credit history variable to categorical
+    validated_data["credit_history"] = validated_data["credit_history"].astype("str")
 
-    validated_data = validated_data[config.model_config.features].copy()
+    # validated_data = validated_data[config.model_configs.features].copy()
 
     errors = None
 

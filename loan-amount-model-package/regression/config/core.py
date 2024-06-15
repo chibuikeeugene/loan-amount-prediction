@@ -4,10 +4,11 @@ from typing import List
 from pydantic import BaseModel
 from strictyaml import YAML, load
 
-import regression
+import os
 
 # Top level project directories
-PACKAGE_ROOT = Path(regression.__file__).resolve().parent
+PACKAGE_ROOT = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# PACKAGE_ROOT = Path(regression.__file__).resolve().parent
 ROOT = PACKAGE_ROOT.parent
 CONFIG_FILE_PATH = PACKAGE_ROOT / "config.yml"
 DATASET_DIR = PACKAGE_ROOT / "datasets"
@@ -36,19 +37,24 @@ class ModelConfig(BaseModel):
     test_size: float
     C: int
     random_state: int
-    alpha: float
+    cv: int
+    eps: float
+    tol: float
     max_iter: int
     cat_vars: List[str]
     cat_vars_na: List[str]
     num_var_na: List[str]
     num_cont_vars: List[str]
+    mapper: dict[str, str]
+    credit_var_mapper: List[str]
+
 
 
 class Config(BaseModel):
     """master config object"""
 
-    app_config: AppConfig
-    model_config: ModelConfig
+    app_configs: AppConfig
+    model_configs: ModelConfig
 
 
 def find_config_file() -> Path:
@@ -78,8 +84,8 @@ def create_and_validate_config(parsed_config: YAML = None) -> Config:
 
     # specify the data attribute from the strictyaml YAML type
     _config = Config(
-        app_config=AppConfig(**parsed_config.data),
-        model_config=ModelConfig(**parsed_config.data),
+        app_configs=AppConfig(**parsed_config.data),
+        model_configs=ModelConfig(**parsed_config.data),
     )
 
     return _config

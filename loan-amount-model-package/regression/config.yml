@@ -29,11 +29,13 @@ test_size: 0.2
 # to set the random seed
 random_state: 1
 
-alpha: 0.0001
+cv: 5
+eps: 0.0075
+tol: 0.0074
 
 C: 1
 
-max_iter: 1000
+max_iter: 100
 
 cat_vars_na: 
   - married
@@ -54,3 +56,12 @@ cat_vars:
   - self_employed
   - credit_history
   - property_area
+
+mapper:
+  1.0: 'yes' 
+  0.0: 'no'
+  nan: 'no'
+
+
+credit_var_mapper: 
+  - credit_history
