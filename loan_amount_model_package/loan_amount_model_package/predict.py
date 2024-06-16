@@ -19,10 +19,8 @@ loan_amount_pipeline = load_pipeline(filename=pipeline_file_name)
 
 def make_prediction(*, input_data: t.Union[pd.DataFrame, dict]) -> dict:
     """make prediction using the saved model pipeline"""
-    if type(input_data) == dict:
-        data = pd.DataFrame(input_data)
-    else:
-        data = pd.read_csv(f"{DATASET_DIR}/{input_data}")
+    data = pd.DataFrame(input_data)
+
 
     validated_data, errors = validate_inputs(input_data=data)
     

@@ -37,10 +37,10 @@ class ModelConfig(BaseModel):
     test_size: float
     C: int
     random_state: int
-    cv: int
-    eps: float
-    tol: float
+    learning_rate: float
+    max_depth: int
     max_iter: int
+    tol: float
     cat_vars: List[str]
     cat_vars_na: List[str]
     num_var_na: List[str]

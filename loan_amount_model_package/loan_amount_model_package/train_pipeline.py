@@ -39,6 +39,7 @@ def run_training() -> None:
     loan_amount_pipeline.fit(x_train, y_train)
 
     logger.info("saving and persisting the model pipeline to disk...")
+
     # persist the trained model
     save_pipeline(pipeline_to_persist=loan_amount_pipeline)
 

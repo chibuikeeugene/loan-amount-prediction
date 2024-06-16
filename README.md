@@ -1,6 +1,6 @@
 # LOAN AMOUNT PREDICTION  
 
-A machine learning program that estimates the amount of loan to be issued as seen in the dataset given. This program uses a **simple linear lassocv algorithm** to estimate the likely loan user should be eligible for.  
+A machine learning program that estimates the amount of loan to be issued as seen in the dataset given. This program uses a **simple hist gradient boosting regressor algorithm** to estimate the likely loan user should be eligible for.  
 
 ## Data set and its description  
 

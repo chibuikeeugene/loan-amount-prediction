@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "loan_amount_model_package"
-version = "0.0.4"
+version = "0.0.5"
 description = "A package to estimate loan amount suitable for a customer"
 authors = ["chibuikeeugene <chibuikeeugene@gmail.com>"]
 readme = "README.md"

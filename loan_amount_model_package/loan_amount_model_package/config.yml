@@ -29,13 +29,18 @@ test_size: 0.2
 # to set the random seed
 random_state: 1
 
-cv: 5
-eps: 0.0075
+# hyperparameters
+learning_rate: 0.01
+
+max_depth: 4
+
+max_iter: 200
+
+n_estimators: 200
+
 tol: 0.0074
 
 C: 1
-
-max_iter: 100
 
 cat_vars_na: 
   - married

@@ -1,3 +1,5 @@
+
+
 import json
 from typing import Any
 
@@ -8,8 +10,8 @@ from fastapi.encoders import jsonable_encoder
 from loguru import logger
 
 
-from loan_amount_model_package.loan_amount_model_package import __version__ as model_version # type: ignore
-from loan_amount_model_package.loan_amount_model_package.predict import make_prediction # type: ignore
+from loan_amount_model_package import __version__ as model_version # type: ignore
+from loan_amount_model_package.predict import make_prediction # type: ignore
 
 from app import __version__, schemas
 from app.config import settings
@@ -42,7 +44,7 @@ async def predict(input_data: schemas.MultipleLoanDataInput) -> Any:
     # Advanced: You can improve performance of your API by rewriting the
     # `make prediction` function to be async and using await here.
     logger.info(f"Making prediction on inputs: {input_data.inputs}")
-    results = make_prediction(input_data=input_df.replace({np.nan: None}))
+    results = make_prediction(input_data=input_df.replace({np.nan: 0}))
 
     if results["errors"] is not None:
         logger.warning(f"Prediction validation error: {results.get('errors')}")

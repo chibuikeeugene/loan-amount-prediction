@@ -13,7 +13,8 @@ from feature_engine.imputation import (
 
 # For Data transformation
 from feature_engine.transformation import LogCpTransformer
-from sklearn.linear_model import LassoCV
+# from sklearn.linear_model import LassoCV
+from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
 
@@ -62,12 +63,12 @@ loan_amount_pipeline = Pipeline(
         ("scaler", MinMaxScaler()),
         # Adding our final estimator
         (
-            "LassoCV",
-            LassoCV(
-                cv = config.model_configs.cv,
-                eps =  config.model_configs.eps,
+           "Regressor",
+            HistGradientBoostingRegressor(
+                learning_rate = config.model_configs.learning_rate,
                 tol =  config.model_configs.tol,
-                max_iter=config.model_configs.max_iter,
+                max_depth = config.model_configs.max_depth,
+                max_iter= config.model_configs.max_iter,
                 random_state=config.model_configs.random_state,
             ),
         ),

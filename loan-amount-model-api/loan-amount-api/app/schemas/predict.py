@@ -1,7 +1,7 @@
 from typing import Any, List, Optional
 
 from pydantic import BaseModel
-from regression.processing.validation import LoanDataInputSchema
+from loan_amount_model_package.processing.validation import LoanDataInputSchema
 
 
 class PredictionResults(BaseModel):
