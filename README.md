@@ -40,3 +40,9 @@ A machine learning program that estimates the amount of loan to be issued as see
 
 Source code link:
 [Github link](https://github.com/chibuikeeugene/loan-amount-prediction.git)
+
+## Snapshots
+
+![API Documentation 1](<Screenshot 2024-06-22 at 4.15.49 am.png>)
+![API Documentation 2](<Screenshot 2024-06-22 at 4.16.43 am.png>)
+![API Documentation 3](<Screenshot 2024-06-22 at 4.16.54 am.png>)
