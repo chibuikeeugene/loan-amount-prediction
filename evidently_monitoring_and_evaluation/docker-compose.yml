@@ -1,0 +1,40 @@
+version: '3.7'
+
+volumes:
+  grafana_data: {}
+
+networks:
+  frontend:
+  backend:
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: testing
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - frontend
+      - backend
+
+  grafana:
+    image: grafana/grafana
+    user: "100"
+    ports:
+      - 3000:3000
+    networks:
+      - frontend
+      - backend
+    restart: always
+    volumes:
+      - ./config/grafana_datasources.yaml:/etc/grafana/provisioning/datasources/datasource.yaml:ro

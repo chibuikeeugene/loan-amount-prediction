@@ -22,6 +22,7 @@ loguru = "^0.7.2"
 fastapi = "^0.111.0"
 uvicorn = "^0.30.1"
 pydantic-settings = "^2.3.3"
+evidently = "^0.4.28"
 
 
 [tool.poetry.group.dev.dependencies]

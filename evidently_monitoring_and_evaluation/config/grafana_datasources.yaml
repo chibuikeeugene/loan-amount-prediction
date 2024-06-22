@@ -1,0 +1,19 @@
+# config file version
+apiVersion: 1
+
+# list of datasources to insert/update 
+# available in the database
+datasources:
+  - name: PostgreSQL
+    type: postgres
+    url: db.:5432
+    database: postgres
+    user: postgres
+    secureJsonData:
+      password: testing
+    jsonData:
+      sslmode: 'disable' # by default on
+      max_open_connections: 2 # no limit on the number of connections
+      connection_string: postgres://$user:$password@$host:$port/$database
+      timescaledb: true
+      postgresql_version: 903
