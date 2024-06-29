@@ -39,12 +39,12 @@ def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional
     try:
         # replace any further existing numpy nans so that pydantic can validate
         MultipleLoanDataInputs(
-            inputs=validated_data.replace({np.nan: None}).to_dict(orient="records")
+            inputs=validated_data.replace({np.nan: None}).to_dict(orient="records") # type: ignore
         )
     except ValidationError as error:
         errors = error.json()
 
-    return validated_data, errors
+    return validated_data, errors # type: ignore
 
 
 class LoanDataInputSchema(BaseModel):
@@ -56,7 +56,7 @@ class LoanDataInputSchema(BaseModel):
     self_employed: Optional[str]
     applicantincome: Optional[int]
     coapplicantincome: Optional[float]
-    loanamount: Optional[float]
+    # loanamount: Optional[float]
     loan_amount_term: Optional[float]
     credit_history: Optional[float]
     property_area: Optional[str]

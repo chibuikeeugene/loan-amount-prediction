@@ -3,5 +3,7 @@
         "./loan_amount_model_package",
         "./loan-amount-model-api/loan-amount-api",
         "./loan_amount_model_package/loan_amount_model_package"
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true
 }

@@ -1,2 +1,4 @@
 from .health import Health
-from .predict import MultipleLoanDataInput, PredictionResults
+from .predict import PredictionResults, LoanDataInputSchema
+
+# from .predict import MultipleLoanDataInput
