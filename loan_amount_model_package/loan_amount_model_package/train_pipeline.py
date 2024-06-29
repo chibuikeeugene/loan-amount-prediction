@@ -27,7 +27,7 @@ def run_training() -> None:
         test_size=config.model_configs.test_size,
         random_state=config.model_configs.random_state,
     )
-
+    
     # to address missing values in loanamount, which is  our target variable
     # we can replace nan with 0
     y_train = y_train.fillna(0)
@@ -38,10 +38,9 @@ def run_training() -> None:
     # fit the model
     loan_amount_pipeline.fit(x_train, y_train)
 
-    logger.info("saving and persisting the model pipeline to disk...")
-
     # persist the trained model
     save_pipeline(pipeline_to_persist=loan_amount_pipeline)
+    logger.info("saving and persisting the model pipeline to disk...")
 
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@ from loan_amount_model_package import __version__ as _version
 from loan_amount_model_package.config.core import config, DATASET_DIR
 from loan_amount_model_package.processing.data_manager import load_pipeline
 from loan_amount_model_package.processing.validation import validate_inputs
+from pathlib import Path
 
 pipeline_file_name = f"{config.app_configs.pipeline_save_file}{_version}.pkl"
 loan_amount_pipeline = load_pipeline(filename=pipeline_file_name)
@@ -19,12 +20,15 @@ loan_amount_pipeline = load_pipeline(filename=pipeline_file_name)
 
 def make_prediction(*, input_data: t.Union[pd.DataFrame, dict]) -> dict:
     """make prediction using the saved model pipeline"""
+    # # for internal test purposes
+    # data = pd.read_csv(Path(f"{DATASET_DIR}/{input_data}"))
+
+    # for deployment use
     data = pd.DataFrame(input_data)
 
 
     validated_data, errors = validate_inputs(input_data=data)
     
-    # results = {}
 
     results = {"predictions": None, "version": _version, "errors": errors}
 

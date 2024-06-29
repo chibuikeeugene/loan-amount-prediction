@@ -27,7 +27,7 @@ def save_pipeline(*, pipeline_to_persist: Pipeline) -> None:
     # prepare versioned save file name
     save_file_name = f"{config.app_configs.pipeline_save_file}{_version}.pkl"
     save_path = TRAINED_MODEL_DIR / save_file_name
-
+    
     remove_old_pipelines(files_to_keep=[save_file_name])
     joblib.dump(pipeline_to_persist, save_path)
 
