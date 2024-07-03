@@ -8,6 +8,17 @@ networks:
   backend:
 
 services:
+  jupyter: 
+    image: jupyter/base-notebook:latest
+    container_name: jupyter-notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/etc/eugene
+    networks:
+      - backend
+      - frontend
+
   db:
     image: postgres
     restart: always

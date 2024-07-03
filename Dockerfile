@@ -25,11 +25,12 @@ COPY . pyproject.toml /opt/loan-amount-model-project/
 
 RUN pip install --no-cache-dir poetry
 
-# updating PATH to include poetry's bin directory
+# updating PATH to include poetry's bin file
 ENV PATH="${PATH}:~/.poetry/bin"
 
 RUN poetry install
 
+# install model package through pip
 RUN /opt/loan-amount-model-project/.venv/bin/pip install loan_amount_model_package==0.0.7
 
 # Grant ownership and permissions to the user for the application directory
@@ -38,9 +39,9 @@ RUN chmod -R 777 /opt/loan-amount-model-project/
     
 USER loan-user 
 
-EXPOSE 8002
+EXPOSE 8888
 
-CMD ["poetry", "run", "uvicorn", "loan-amount-api.app.main:app", "--host", "localhost", "--port", "8002" ]
+CMD ["poetry", "run", "uvicorn", "loan-amount-api.app.main:app", "--host", "0.0.0.0", "--port", "8888" ]
 
 
 
