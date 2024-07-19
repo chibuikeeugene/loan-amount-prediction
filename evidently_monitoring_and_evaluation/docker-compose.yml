@@ -1,22 +1,20 @@
 version: '3.7'
 
-volumes:
-  grafana_data: {}
-
 networks:
   frontend:
   backend:
 
 services:
   jupyter:
-    user: root 
-    image: jupyter/base-notebook:latest
+    image: jupyter/base-notebook
     container_name: jupyter-notebook
+    user: root
+    environment:
+      GRANT_SUDO: "yes"
     ports:
       - "8888:8888"
     volumes:
-      - ./loan-amount-monitoring_and_evalutaion.ipynb:/work/notebook
-      # - ./notebooks:/etc/eugene
+      - ./notebooks:/work
     networks:
       - backend
       - frontend
@@ -26,10 +24,14 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: testing
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
     ports:
       - "5432:5432"
     networks:
       - backend
+    volumes:
+      - ./db_data:/var/lib/postgresql/data:rw
 
   adminer:
     image: adminer
@@ -51,3 +53,7 @@ services:
     restart: always
     volumes:
       - ./config/grafana_datasources.yaml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
+
+volumes:
+  grafana_data: {}
+  db_data:
