@@ -3,6 +3,7 @@ from json import load
 from math import log
 import os
 from pdb import run
+import re
 import joblib
 import pandas as pd
 import uuid
@@ -10,6 +11,8 @@ from sklearn.pipeline import Pipeline
 from typing import Union
 from datetime import datetime
 from loguru import logger
+
+from prefect import flow, task
 
 # Global path variable
 current_path = os.path.dirname(__file__)
@@ -84,7 +87,7 @@ def applyModel(input_file: str, output_file: str):
     # save the results
     save_results(refined_dataset, preds, output_file)
 
-
+@task(retries=2, retry_delay_seconds=5)
 def getFile(run_date: datetime):
     """ function to get the required file to save results"""
     year = run_date.year
@@ -95,7 +98,7 @@ def getFile(run_date: datetime):
     logger.info(f'creating and loading prediction output file: {output_file}')
     return output_file
 
-
+@task(retries=2, retry_delay_seconds=5)
 def generatePredictions(run_date:datetime, input_file: str):
     """ function to generate predictions"""
     input_file = input_file
@@ -103,7 +106,7 @@ def generatePredictions(run_date:datetime, input_file: str):
     applyModel(input_file, output_file)
 
 
-
+@flow(log_prints=True)
 def run_program():
     generatePredictions(
         run_date=datetime.now(), 
