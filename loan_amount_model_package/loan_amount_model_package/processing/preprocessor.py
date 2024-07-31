@@ -1,8 +1,9 @@
-from sklearn.base import BaseEstimator, TransformerMixin
 import pandas as pd
+from sklearn.base import BaseEstimator, TransformerMixin
+
 
 class Mapper(BaseEstimator, TransformerMixin):
-    def __init__(self, variable:list[str], mapping: dict):
+    def __init__(self, variable: list[str], mapping: dict):
         self.mapping = mapping
         self.variable = variable
         super().__init__()

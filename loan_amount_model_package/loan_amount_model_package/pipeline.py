@@ -13,6 +13,7 @@ from feature_engine.imputation import (
 
 # For Data transformation
 from feature_engine.transformation import LogCpTransformer
+
 # from sklearn.linear_model import LassoCV
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.pipeline import Pipeline
@@ -44,13 +45,20 @@ loan_amount_pipeline = Pipeline(
             ),
         ),
         # Mapping our credit history variable values
-        ('credit_history_mapping', Mapper(
-        variable=config.model_configs.credit_var_mapper, mapping=config.model_configs.mapper)),
+        (
+            "credit_history_mapping",
+            Mapper(
+                variable=config.model_configs.credit_var_mapper,
+                mapping=config.model_configs.mapper,
+            ),
+        ),
         # == CATEGORICAL ENCODING ======
         # encode categorical variables using one hot encoding into k-1 variables
         (
             "categorical_encoder",
-            OrdinalEncoder(encoding_method='arbitrary', variables=config.model_configs.cat_vars),
+            OrdinalEncoder(
+                encoding_method="arbitrary", variables=config.model_configs.cat_vars
+            ),
         ),
         # === variable transformation ======
         (
@@ -63,12 +71,12 @@ loan_amount_pipeline = Pipeline(
         ("scaler", MinMaxScaler()),
         # Adding our final estimator
         (
-           "Regressor",
+            "Regressor",
             HistGradientBoostingRegressor(
-                learning_rate = config.model_configs.learning_rate,
-                tol =  config.model_configs.tol,
-                max_depth = config.model_configs.max_depth,
-                max_iter= config.model_configs.max_iter,
+                learning_rate=config.model_configs.learning_rate,
+                tol=config.model_configs.tol,
+                max_depth=config.model_configs.max_depth,
+                max_iter=config.model_configs.max_iter,
                 random_state=config.model_configs.random_state,
             ),
         ),

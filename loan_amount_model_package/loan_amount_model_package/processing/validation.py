@@ -16,7 +16,7 @@ def drop_na_inputs(*, input_data: pd.DataFrame) -> pd.DataFrame:
         if var not in config.model_configs.cat_vars_na + config.model_configs.num_var_na
         and validated_data[var].isnull().sum() > 0
     ]
-    
+
     validated_data.dropna(subset=new_vars_with_na, inplace=True)
 
     return validated_data
@@ -27,24 +27,22 @@ def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional
 
     input_data.columns = input_data.columns.str.lower()
 
-
     validated_data = drop_na_inputs(input_data=input_data)
 
     # converting the credit history variable to categorical
     validated_data["credit_history"] = validated_data["credit_history"].astype("str")
-
 
     errors = None
 
     try:
         # replace any further existing numpy nans so that pydantic can validate
         MultipleLoanDataInputs(
-            inputs=validated_data.replace({np.nan: None}).to_dict(orient="records") # type: ignore
+            inputs=validated_data.replace({np.nan: None}).to_dict(orient="records")  # type: ignore
         )
     except ValidationError as error:
         errors = error.json()
 
-    return validated_data, errors # type: ignore
+    return validated_data, errors  # type: ignore
 
 
 class LoanDataInputSchema(BaseModel):

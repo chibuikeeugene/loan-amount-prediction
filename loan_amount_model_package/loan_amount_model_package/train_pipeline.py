@@ -1,15 +1,18 @@
-
-import os,sys
+import os
+import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-import numpy as np
-from loguru import logger
+import numpy as np  # noqa: E402
+from loguru import logger  # noqa: E402
+from sklearn.model_selection import train_test_split  # noqa: E402
 
-from loan_amount_model_package.config.core import config
-from loan_amount_model_package.pipeline import loan_amount_pipeline
-from loan_amount_model_package.processing.data_manager import load_dataset, save_pipeline
-from sklearn.model_selection import train_test_split
+from loan_amount_model_package.config.core import config  # noqa: E402
+from loan_amount_model_package.pipeline import loan_amount_pipeline  # noqa: E402
+from loan_amount_model_package.processing.data_manager import (  # noqa: E402
+    load_dataset,
+    save_pipeline,
+)
 
 
 def run_training() -> None:
@@ -27,7 +30,7 @@ def run_training() -> None:
         test_size=config.model_configs.test_size,
         random_state=config.model_configs.random_state,
     )
-    
+
     # to address missing values in loanamount, which is  our target variable
     # we can replace nan with 0
     y_train = y_train.fillna(0)

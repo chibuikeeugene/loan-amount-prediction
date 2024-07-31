@@ -1,10 +1,9 @@
+import os
 from pathlib import Path
-from typing import List
+from typing import List, Union
 
 from pydantic import BaseModel
 from strictyaml import YAML, load
-
-import os
 
 # Top level project directories
 PACKAGE_ROOT = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -41,13 +40,12 @@ class ModelConfig(BaseModel):
     max_depth: int
     max_iter: int
     tol: float
-    cat_vars: List[str]
-    cat_vars_na: List[str]
-    num_var_na: List[str]
-    num_cont_vars: List[str]
+    cat_vars: List[Union[str, int]]
+    cat_vars_na: List[Union[str, int]]
+    num_var_na: List[Union[str, int]]
+    num_cont_vars: List[Union[str, int]]
     mapper: dict[str, str]
     credit_var_mapper: List[str]
-
 
 
 class Config(BaseModel):
@@ -64,7 +62,7 @@ def find_config_file() -> Path:
     raise Exception(f"Config not found at {CONFIG_FILE_PATH!r}")
 
 
-def fetch_config_from_yaml(cfg_path: Path = None) -> YAML:
+def fetch_config_from_yaml(cfg_path: Path = None) -> YAML:  # type: ignore
     """parse the YAML containing the package configuration"""
 
     if not cfg_path:
@@ -77,18 +75,18 @@ def fetch_config_from_yaml(cfg_path: Path = None) -> YAML:
     raise OSError(f"Did not find config file at path: {cfg_path}")
 
 
-def create_and_validate_config(parsed_config: YAML = None) -> Config:
+def create_and_validate_config(parsed_config: YAML = None) -> Config:  # type: ignore
     """run validation on config values"""
     if parsed_config is None:
-        parsed_config = fetch_config_from_yaml()
+        parsed_config = fetch_config_from_yaml()  # type: ignore
 
     # specify the data attribute from the strictyaml YAML type
     _config = Config(
-        app_configs=AppConfig(**parsed_config.data),
-        model_configs=ModelConfig(**parsed_config.data),
+        app_configs=AppConfig(**parsed_config.data),  # type: ignore
+        model_configs=ModelConfig(**parsed_config.data),  # type: ignore
     )
 
     return _config
 
 
-config = create_and_validate_config()
+config = create_and_validate_config()  # type: ignore

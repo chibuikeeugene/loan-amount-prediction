@@ -1,18 +1,22 @@
-import os,sys
+import os
+import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 
-import typing as t
+import typing as t  # noqa: E402
 
-import numpy as np
-import pandas as pd
+import numpy as np  # noqa: E402
+import pandas as pd  # noqa: E402
 
-from loan_amount_model_package import __version__ as _version
-from loan_amount_model_package.config.core import config, DATASET_DIR
-from loan_amount_model_package.processing.data_manager import load_pipeline
-from loan_amount_model_package.processing.validation import validate_inputs
-from pathlib import Path
+from loan_amount_model_package import __version__ as _version  # noqa: E402
+from loan_amount_model_package.config.core import config  # noqa: E402
+from loan_amount_model_package.processing.data_manager import (
+    load_pipeline,
+)  # noqa: E402
+from loan_amount_model_package.processing.validation import (
+    validate_inputs,
+)  # noqa: E402
 
 pipeline_file_name = f"{config.app_configs.pipeline_save_file}{_version}.pkl"
 loan_amount_pipeline = load_pipeline(filename=pipeline_file_name)
@@ -26,9 +30,7 @@ def make_prediction(*, input_data: t.Union[pd.DataFrame, dict]) -> dict:
     # for deployment use
     data = pd.DataFrame(input_data)
 
-
     validated_data, errors = validate_inputs(input_data=data)
-    
 
     results = {"predictions": None, "version": _version, "errors": errors}
 

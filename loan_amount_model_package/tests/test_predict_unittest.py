@@ -1,7 +1,9 @@
-## UNIT TEST 1 ##
+# UNIT TEST 1
+
+import numpy as np
 
 from loan_amount_model_package import predict
-import numpy as np
+
 
 def test_make_prediction(sample_input_data):
     # Given
