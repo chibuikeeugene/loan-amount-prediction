@@ -5,5 +5,9 @@
         "./loan_amount_model_package/loan_amount_model_package"
     ],
     "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.autoImportCompletions": true
+    "python.analysis.autoImportCompletions": true,
+    "circleci.filters.branchFilter": "default",
+    "circleci.persistedProjectSelection": [
+        "circleci/9VZRConhbBQpzNjV8DoDyX/P6eXgYaw1iPdv1bEXyL8hw"
+    ]
 }
