@@ -30,6 +30,7 @@ jobs:
             tox 
 
 workflows:
+  version: 2
   test:
     jobs:
       - test_model_package:
