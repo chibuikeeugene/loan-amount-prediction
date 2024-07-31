@@ -31,6 +31,7 @@ pytest = "^8.3.2"
 seaborn = "^0.13.2"
 matplotlib = "^3.9.0"
 tox = "^4.15.1"
+ipykernel = "^6.29.5"
 
 [build-system]
 requires = ["poetry-core"]

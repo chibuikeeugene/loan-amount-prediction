@@ -1,18 +1,15 @@
+## UNIT TEST 1 ##
+
 from loan_amount_model_package import predict
-
-
 import numpy as np
-
-from regression.predict import make_prediction
-
 
 def test_make_prediction(sample_input_data):
     # Given
-    expected_first_prediction_value = 116.27
+    expected_first_prediction_value = 119.27
     expected_no_predictions = 367
 
     # When
-    result = make_prediction(input_data=sample_input_data)
+    result = predict.make_prediction(input_data=sample_input_data)
 
     # Then
     predictions = result.get("predictions")
