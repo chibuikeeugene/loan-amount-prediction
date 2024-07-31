@@ -1,3 +1,6 @@
+from loan_amount_model_package import predict
+
+
 import numpy as np
 
 from regression.predict import make_prediction
