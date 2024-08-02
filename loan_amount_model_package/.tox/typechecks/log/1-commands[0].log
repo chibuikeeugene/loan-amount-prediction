@@ -4,17 +4,17 @@ env HOME: /Users/eugene
 env TMPDIR: /var/folders/br/h04swktx1ls9f8qq2dzv13000000gn/T/
 env LANG: en_US.UTF-8
 env TERM: xterm-256color
-env PATH: /Users/eugene/Personal_Projects/ML_Project/loan-amount-prediction/loan_amount_model_package/.tox/test_package/bin:/Users/eugene/.vscode/extensions/ms-python.python-2024.8.1/python_files/deactivate/zsh:/Users/eugene/Personal_Projects/ML_Project/loan-amount-prediction/.venv/bin:/Users/eugene/.local/bin/kaggle:/usr/local/opt/postgresql@15/bin:/Users/eugene/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/PostgreSQL/14/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/opt/homebrew/opt/openjdk/bin:/Users/eugene/opt/anaconda3/bin:/Users/eugene/opt/anaconda3/condabin:/Users/eugene/Developer/flutter/bin:/Users/eugene/.local/bin
-env PYTHONHASHSEED: 3440699996
+env PATH: /Users/eugene/Personal_Projects/ML_Project/loan-amount-prediction/loan_amount_model_package/.tox/test_package/bin:/Users/eugene/Personal_Projects/ML_Project/loan-amount-prediction/loan_amount_model_package/.venv/bin:/Users/eugene/.vscode/extensions/ms-python.python-2024.8.1/python_files/deactivate/zsh:/Users/eugene/Personal_Projects/ML_Project/loan-amount-prediction/.venv/bin:/Users/eugene/.local/bin/kaggle:/usr/local/opt/postgresql@15/bin:/Users/eugene/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/PostgreSQL/14/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/opt/homebrew/opt/openjdk/bin:/Users/eugene/opt/anaconda3/bin:/Users/eugene/opt/anaconda3/condabin:/Users/eugene/Developer/flutter/bin:/Users/eugene/.local/bin
+env PYTHONHASHSEED: 3456368136
 env PIP_DISABLE_PIP_VERSION_CHECK: 1
 env PYTHONIOENCODING: utf-8
 env TOX_ENV_NAME: typechecks
 env TOX_WORK_DIR: /Users/eugene/Personal_Projects/ML_Project/loan-amount-prediction/loan_amount_model_package/.tox
 env TOX_ENV_DIR: /Users/eugene/Personal_Projects/ML_Project/loan-amount-prediction/loan_amount_model_package/.tox/test_package
 env VIRTUAL_ENV: /Users/eugene/Personal_Projects/ML_Project/loan-amount-prediction/loan_amount_model_package/.tox/test_package
-env COLUMNS: 127
-env LINES: 22
-metadata pid: 64376
+env COLUMNS: 171
+env LINES: 14
+metadata pid: 72062
 cwd: /Users/eugene/Personal_Projects/ML_Project/loan-amount-prediction/loan_amount_model_package
 allow: /Users/eugene/Personal_Projects/ML_Project/loan-amount-prediction/loan_amount_model_package/.tox/test_package/bin/*:poetry
 cmd: poetry run mypy loan_amount_model_package/
