@@ -27,6 +27,7 @@ jobs:
           command: |
             export PATH=$PATH:/home/circleci/project/loan-amount-prediction/loanamount_env/bin && source ~/.bashrc
             pwd
+            ls -la
             # cd /home/circleci/project/loan-amount-prediction/loan_amount_model_package
             # tox 
 
