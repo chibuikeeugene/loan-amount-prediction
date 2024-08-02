@@ -27,7 +27,7 @@ jobs:
       - run:
           name: run_model_package_test
           command: |
-            export PATH=$PATH:/home/circleci/project/loan-amount-prediction/loanamount_env/bin && source ~/.bashrc
+            export PATH=$PATH:/home/circleci/project/loanamount_env/bin && source ~/.bashrc
             poetry run tox
 
   # deploy_to_aws:
