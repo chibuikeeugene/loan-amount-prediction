@@ -32,11 +32,6 @@ isort = "^5.13.2"
 black = "^24.4.2"
 
 
-[tool.poetry.group.dev.dependencies]
-seaborn = "^0.13.2"
-matplotlib = "^3.9.0"
-ipykernel = "^6.29.5"
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

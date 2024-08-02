@@ -28,17 +28,17 @@ jobs:
             # export PATH=$PATH:/home/circleci/project/loan-amount-prediction/loanamount_env/bin && source ~/.bashrc
             poetry run tox
 
-  deploy_to_aws:
-    <<: *defaults
-    working_directory: ~/project/loan-amount-prediction
-    steps:
-      - checkout:
-          path: ~/project
-      - *prepare_venv
-      - run:
-          name: deploy_to_aws
-          command: |
-            poetry run python deploy_to_aws.py
+  # deploy_to_aws:
+  #   <<: *defaults
+  #   working_directory: ~/project/loan-amount-prediction
+  #   steps:
+  #     - checkout:
+  #         path: ~/project
+  #     - *prepare_venv
+  #     - run:
+  #         name: deploy_to_aws
+  #         command: |
+  #           poetry run python deploy_to_aws.py
 
 workflows:
   version: 2
