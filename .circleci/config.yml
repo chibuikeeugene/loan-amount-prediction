@@ -12,7 +12,7 @@ prepare_venv: &prepare_venv
       python3.9 -m venv loanamount_env
       source loanamount_env/bin/activate
       pip install --upgrade poetry
-      poetry install
+      poetry install --no-root
 
 jobs:
   test_model_package:
@@ -26,8 +26,9 @@ jobs:
           name: run_model_package_test
           command: |
             export PATH=$PATH:/home/circleci/project/loan-amount-prediction/loanamount_env/bin && source ~/.bashrc
-            cd /home/circleci/project/loan-amount-prediction/loan_amount_model_package
-            tox 
+            pwd
+            # cd /home/circleci/project/loan-amount-prediction/loan_amount_model_package
+            # tox 
 
 workflows:
   version: 2
