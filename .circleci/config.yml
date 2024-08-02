@@ -28,7 +28,8 @@ jobs:
           name: run_model_package_test
           command: |
             export PATH=$PATH:/home/circleci/project/loanamount_env/bin && source ~/.bashrc
-            poetry run tox
+            cd .venv/bin 
+            tox
 
   # deploy_to_aws:
   #   <<: *defaults
