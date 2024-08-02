@@ -1,4 +1,4 @@
-version: 2.1
+version: 2
 
 defaults: &defaults
   docker:
@@ -17,23 +17,24 @@ prepare_venv: &prepare_venv
 jobs:
   test_model_package:
     <<: *defaults
-    working_directory: ~/project/loan_amount_model_package
+    working_directory: ~/project/loan-amount-prediction
     steps:
       - checkout:
-          path: ~/project
+          path: ~/project/loan-amount-prediction
       - *prepare_venv
       - run:
           name: run_model_package_test
           command: |
-            export PATH=$PATH:/home/circleci/project/loan_amount_model_package/loanamount_env/bin && source ~/.bashrc
-            cd /home/circleci/project/loan_amount_model_package/
+            export PATH=$PATH:/home/circleci/project/loan-amount-prediction/loanamount_env/bin && source ~/.bashrc
+            cd /home/circleci/project/loan-amount-prediction/loan_amount_model_package
             tox 
 
 workflows:
   version: 2
-  test:
+  loan_app_workflow:
     jobs:
       - test_model_package:
           filters:
             branches:
-              only: master
+              only: main
+

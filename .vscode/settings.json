@@ -6,7 +6,7 @@
     ],
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.autoImportCompletions": true,
-    "circleci.filters.branchFilter": "default",
+    "circleci.filters.branchFilter": "allBranches",
     "circleci.persistedProjectSelection": [
         "circleci/9VZRConhbBQpzNjV8DoDyX/P6eXgYaw1iPdv1bEXyL8hw"
     ]
