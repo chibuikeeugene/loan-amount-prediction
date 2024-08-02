@@ -26,7 +26,7 @@ jobs:
           name: run_model_package_test
           command: |
             # export PATH=$PATH:/home/circleci/project/loan-amount-prediction/loanamount_env/bin && source ~/.bashrc
-            tox 
+            poetry run tox 
 
 workflows:
   version: 2
