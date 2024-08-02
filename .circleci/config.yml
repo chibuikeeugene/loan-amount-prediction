@@ -12,7 +12,9 @@ prepare_venv: &prepare_venv
       python3.9 -m venv loanamount_env
       source loanamount_env/bin/activate
       pip install --upgrade poetry
+      poetry config virtualenvs.in-project true
       poetry install --no-root
+      
 
 jobs:
   test_model_package:
