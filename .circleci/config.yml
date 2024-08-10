@@ -11,7 +11,7 @@ prepare_venv: &prepare_venv
     command: |
       python3.9 -m venv loanamount_env
       source loanamount_env/bin/activate
-      cp .pyproject.toml ~/project/
+      cp . pyproject.toml ~/project/
       pip install --upgrade poetry
       poetry config virtualenvs.in-project true
       deactivate
