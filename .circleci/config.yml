@@ -14,9 +14,10 @@ prepare_venv: &prepare_venv
       pip install --upgrade poetry
       poetry config virtualenvs.in-project true
       poetry install --no-root
+      source .venv/bin/activate
       export PATH=$PATH:/home/circleci/project/loanamount_env/bin && source ~/.bashrc
       export PATH=$PATH:/home/circleci/project/.venv/bin && source ~/.bashrc
-      source ~/project/.venv/bin/activate
+      
 
 jobs:
   test_model_package:
