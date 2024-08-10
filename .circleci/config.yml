@@ -22,12 +22,11 @@ prepare_venv: &prepare_venv
 jobs:
   test_model_package:
     <<: *defaults
-    <<: *prepare_venv
     working_directory: ~/project/loan_amount_model_package
     steps:
       - checkout:
           path: ~/project
-      # - *prepare_venv
+      - *prepare_venv
       - run:
           name: run_model_package_test
           command: |
