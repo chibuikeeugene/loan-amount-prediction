@@ -29,6 +29,7 @@ jobs:
       - run:
           name: run_model_package_test
           command: |
+            poetry shell
             pwd
             ls -al
             # source ~/project/loan_amount_model_package/.venv/bin/activate
