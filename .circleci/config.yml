@@ -11,6 +11,7 @@ prepare_venv: &prepare_venv
     command: |
       python3.9 -m venv loanamount_env
       source loanamount_env/bin/activate
+      pip install --upgrade pip
       pip install --upgrade poetry
       poetry config virtualenvs.in-project true
       deactivate
