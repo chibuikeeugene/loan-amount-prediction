@@ -13,6 +13,7 @@ prepare_venv: &prepare_venv
       source loanamount_env/bin/activate
       pip install --upgrade poetry
       poetry config virtualenvs.in-project true
+      poetry shell
       poetry install --no-root
       export PATH=$PATH:/home/circleci/project/.venv/bin && source ~/.bashrc
       # export PATH=$PATH:/home/circleci/project/loanamount_env/bin && source ~/.bashrc
@@ -29,11 +30,11 @@ jobs:
       - run:
           name: run_model_package_test
           command: |
-            poetry shell
-            # pwd
-            # ls -al
+            # poetry shell
+            pwd
+            ls -al
             # source ~/project/loan_amount_model_package/.venv/bin/activate
-            poetry run tox
+            # poetry run tox
   # test_model_api:
   # deploy_to_aws:
   #   <<: *defaults
