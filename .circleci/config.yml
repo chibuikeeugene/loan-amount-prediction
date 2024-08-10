@@ -15,7 +15,7 @@ prepare_venv: &prepare_venv
       pip install poetry==1.8.2
       poetry config virtualenvs.in-project true
       deactivate
-      poetry install --no-root
+      poetry lock && poetry install --no-root
       # export PATH=$PATH:/home/circleci/project/.venv/bin && source ~/.bashrc
       # export PATH=$PATH:/home/circleci/project/loanamount_env/bin && source ~/.bashrc
       
