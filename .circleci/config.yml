@@ -20,11 +20,11 @@ prepare_venv: &prepare_venv
 jobs:
   test_model_package:
     <<: *defaults
-    working_directory: ~/project/loan_amount_model_package
+    working_directory: ~/project
     steps:
       - *prepare_venv
       - checkout:
-          path: ~/project
+          path: ~/project/loan_amount_model_package
       - run:
           name: run_model_package_test
           command: |
