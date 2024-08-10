@@ -27,7 +27,7 @@ jobs:
       - run:
           name: run_model_package_test
           command: |
-            tox
+            poetry run tox
   # test_model_api:
   # deploy_to_aws:
   #   <<: *defaults
