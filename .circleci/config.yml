@@ -9,12 +9,13 @@ prepare_venv: &prepare_venv
   run:
     name: Prepare venv
     command: |
-      python3.9 -m venv loanamount_env
-      source loanamount_env/bin/activate
-      pip install --upgrade poetry tox
+      # python3.9 -m venv loanamount_env
+      # source loanamount_env/bin/activate
+      pip install --upgrade poetry
       poetry config virtualenvs.in-project true
       poetry install --no-root
-      export PATH=$PATH:/home/circleci/project/loanamount_env/bin && source ~/.bashrc
+      export PATH=$PATH:/home/circleci/project/.venv/bin && source ~/.bashrc
+      # export PATH=$PATH:/home/circleci/project/loanamount_env/bin && source ~/.bashrc
       
 
 jobs:
