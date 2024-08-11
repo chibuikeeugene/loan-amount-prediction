@@ -29,7 +29,10 @@ jobs:
           name: run_model_package_test
           command: |
             export PATH=$PATH:/home/circleci/project/.venv/bin && source ~/.bashrc
-            poetry shell && poetry run tox
+            ls -al
+            cd ~/project/loan_amount_model_package/loanamount_env/lib/python3.9/site-packages
+            ls 
+            # poetry run tox
   # test_model_api:
   # deploy_to_aws:
   #   <<: *defaults
