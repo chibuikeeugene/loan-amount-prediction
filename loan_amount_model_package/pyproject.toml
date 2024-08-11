@@ -13,6 +13,14 @@ mypy = "^1.11.1"
 flake8 = "^7.1.1"
 isort = "^5.13.2"
 black = "^24.8.0"
+numpy = "^2.0.1"
+pandas = "^2.2.2"
+pydantic = "^2.8.2"
+scikit-learn = "^1.5.1"
+strictyaml = "^1.7.3"
+feature-engine = "^1.8.0"
+joblib = "^1.4.2"
+loguru = "^0.7.2"
 
 
 [build-system]
