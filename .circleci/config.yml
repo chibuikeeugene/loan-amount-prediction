@@ -4,6 +4,8 @@ defaults: &defaults
   docker:
     - image: circleci/python:3.9
   working_directory: ~/project
+
+prepare_venv: &prepare_venv
   run:
     name: Prepare venv
     command: |
@@ -12,22 +14,7 @@ defaults: &defaults
       pip install --upgrade pip
       pip install poetry==1.8.2
       poetry config virtualenvs.in-project true
-      deactivate
       poetry install --no-root
-
-# prepare_venv: &prepare_venv
-#   run:
-#     name: Prepare venv
-#     command: |
-#       python3.9 -m venv loanamount_env
-#       source loanamount_env/bin/activate
-#       pip install --upgrade pip
-#       pip install poetry==1.8.2
-#       poetry config virtualenvs.in-project true
-#       deactivate
-#       poetry install --no-root
-#       # export PATH=$PATH:/home/circleci/project/.venv/bin && source ~/.bashrc
-#       # export PATH=$PATH:/home/circleci/project/loanamount_env/bin && source ~/.bashrc
       
 
 jobs:
@@ -37,10 +24,11 @@ jobs:
     steps:
       - checkout:
           path: ~/project
-      # - *prepare_venv
+      - *prepare_venv
       - run:
           name: run_model_package_test
           command: |
+            export PATH=$PATH:/home/circleci/project/.venv/bin && source ~/.bashrc
             poetry shell && poetry run tox
   # test_model_api:
   # deploy_to_aws:
