@@ -1,0 +1,7 @@
+poetry.lock
+*.sqlite
+*.md
+*.toml
+*.png
+mlartifacts/
+.vscode

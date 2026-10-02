@@ -1,47 +1,58 @@
+# ----------stage: builder------------- #
 # Define base image
-FROM python:3.9.12-slim
+FROM python:3.9.12-slim AS builder
 
-# Set environment variables
-ENV buildTag=1.0
+WORKDIR /build
 
-ENV PYTHONDONTWRITEBYTECODE 1
+RUN python -m venv /opt/venv
 
-ENV PYTHONUNBUFFERED 1
-
-# setting the working directory
-WORKDIR /opt/loan-amount-model-project/
-
-# creating a user other than root 
-RUN adduser --disabled-password --gecos '' loan-user
+ENV PATH="/opt/venv/bin:$PATH"
 
 # install and update system dependencies
 RUN apt-get update \
     && apt-get install
 
-# copy project files and folder to our container directory
-COPY . loan-amount-model-api /opt/loan-amount-model-project/
+COPY ./requirements/requirements.txt ./requirements.txt
 
-COPY . pyproject.toml /opt/loan-amount-model-project/
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install --no-cache-dir poetry
 
-# updating PATH to include poetry's bin file
-ENV PATH="${PATH}:~/.poetry/bin"
+# ------------ stage: runtime --------------- #
+FROM python:3.9.12-slim AS runtime
 
-RUN poetry install
+# Set environment variables
+ENV buildTag=1.0 \
+PYTHONDONTWRITEBYTECODE=1 \
+PYTHONUNBUFFERED=1 \
+PATH="/opt/venv/bin:$PATH"
 
-# install model package through pip
-RUN /opt/loan-amount-model-project/.venv/bin/pip install loan_amount_model_package==0.0.7
+# setting the working directory
+WORKDIR /project
 
-# Grant ownership and permissions to the user for the application directory
-RUN chown -R loan-user:loan-user /opt/loan-amount-model-project/
-RUN chmod -R 777 /opt/loan-amount-model-project/
-    
+# copy dependency files from build to runtime
+COPY --from=builder /opt/venv /opt/venv
+
+# creating a user other than root 
+RUN useradd --create-home --uid 10000 loan-user
+
+# Copy,Grant ownership and permissions to the user for the application directory
+COPY --chown=loan-user:loan-user /loan-amount-model-api /loan-amount-model-api
+COPY --chown=loan-user:loan-user /loan_amount_model_package /loan_amount_model_package
+RUN chmod -R 2755 /project
+
+# set the app user
 USER loan-user 
 
-EXPOSE 8888
+EXPOSE 8001
 
-CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8888" ]
+HEALTHCHECK \
+--interval=30s \
+--timeout=30s \
+--start-period=5s \
+--retries=3 \
+CMD python -c "import urllib.request; urllib.request.urlopen('http://0.0.0.0:8001/health, timeout=30)"
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001" ]
 
 
 

@@ -1,4 +1,4 @@
-#!/Users/eugene/Personal_Projects/ML_Project/loan-amount-prediction/loanamount_env/bin/python
+#!/Users/chibuikeiwuchukwu/Docs/loan-amount-prediction/loanamount_env/bin/python3.9
 # -*- coding: utf-8 -*-
 import re
 import sys
