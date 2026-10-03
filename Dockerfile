@@ -36,8 +36,8 @@ COPY --from=builder /opt/venv /opt/venv
 RUN useradd --create-home --uid 10000 loan-user
 
 # Copy,Grant ownership and permissions to the user for the application directory
-COPY --chown=loan-user:loan-user /loan-amount-model-api /loan-amount-model-api
-COPY --chown=loan-user:loan-user /loan_amount_model_package /loan_amount_model_package
+COPY --chown=loan-user:loan-user /loan-amount-model-api /project/loan-amount-model-api
+COPY --chown=loan-user:loan-user /loan_amount_model_package /project/loan_amount_model_package
 RUN chmod -R 2755 /project
 
 # set the app user
