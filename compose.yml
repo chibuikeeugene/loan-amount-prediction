@@ -1,5 +1,18 @@
 services:
   api:
     build:
-      context: contextPath
+      context: .
       dockerfile: Dockerfile
+    image: chuby6/loan-service:v1.0.0
+    ports:
+      - "80:8001"
+    container_name: loan-service
+    environment:
+      DATABASE_URI: value
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17-alpine
+    
