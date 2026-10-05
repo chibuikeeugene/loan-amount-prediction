@@ -21,13 +21,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 FROM python:3.9.12-slim AS runtime
 
 # Set environment variables
-ENV buildTag=1.0 \
-PYTHONDONTWRITEBYTECODE=1 \
+ENV PYTHONDONTWRITEBYTECODE=1 \
 PYTHONUNBUFFERED=1 \
-PATH="/opt/venv/bin:$PATH"
+PATH="/opt/venv/bin:$PATH" \
+PYTHONPATH="/project"
 
 # setting the working directory
-WORKDIR /project
+WORKDIR /project/loan-amount-model-api
+
 
 # copy dependency files from build to runtime
 COPY --from=builder /opt/venv /opt/venv
@@ -50,7 +51,7 @@ HEALTHCHECK \
 --timeout=30s \
 --start-period=5s \
 --retries=3 \
-CMD python -c "import urllib.request; urllib.request.urlopen('http://0.0.0.0:8001/health, timeout=30)"
+CMD python -c "import urllib.request; urllib.request.urlopen('http://0.0.0.0:8001/health', timeout=30)"
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001" ]
 
