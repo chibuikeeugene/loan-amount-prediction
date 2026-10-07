@@ -3,16 +3,32 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: chuby6/loan-service:v1.0.0
     ports:
-      - "80:8001"
-    container_name: loan-service
+      - "80:8001" # port forwarding
+    container_name: loan-service-api
     environment:
-      DATABASE_URI: value
+      DATABASE_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
     depends_on:
       db:
         condition: service_healthy
+    restart: unless-stopped # adding a restart policy
+    mem_limit: "1g" # setting memory limit
 
   db:
     image: postgres:17-alpine
-    
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data:rw
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+volumes:
+  postgres-data:

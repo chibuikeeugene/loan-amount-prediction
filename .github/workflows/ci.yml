@@ -1,0 +1,33 @@
+name: loan-service-ci-workflow
+
+on:
+    push:
+        branches: 
+            - main
+    pull_request: 
+        branches:
+            - main
+
+permissions: 
+    contents: read
+
+jobs:
+    quality-check:
+        name: Code quality and linting checks
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - name: 
+              uses:
+
+    build:
+        name: Build application container image
+        runs-on: ubuntu-latest
+
+    test:
+        name: run test on container application
+        runs-on: ubuntu-latest
+    
+    coverage:
+        name: Generate coverage report
+        runs-on: ubuntu-latest
