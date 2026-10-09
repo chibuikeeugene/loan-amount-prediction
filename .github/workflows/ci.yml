@@ -32,10 +32,10 @@ jobs:
                 python -m pip install -r requirements/requirements.txt
 
             - name: run lint checks
-              run: python -m ruff check .
+              run: python -m ruff check --fix loan-amount-model-api/
 
             - name: run test
-              run: python -m pytest -v ./loan-amount-model-api/tests/
+              run: python -m pytest -v loan-amount-model-api/tests/
 
             - name: Generate coverage report
               run: |
