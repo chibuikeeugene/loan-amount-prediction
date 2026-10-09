@@ -1,0 +1,14 @@
+name:
+
+on:
+
+permissions: 
+
+jobs:
+    build:
+        name: Build application container image
+        runs-on: ubuntu-latest
+
+    test:
+        name: run test on container application
+        runs-on: ubuntu-latest

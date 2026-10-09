@@ -1,0 +1,52 @@
+name: loan-service-ci-workflow
+
+on:
+    push:
+        branches: 
+            - main
+    pull_request: 
+        branches:
+            - main
+
+permissions: 
+    contents: read
+
+jobs:
+    quality-check-tests:
+        name: Code quality and linting checks
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - name: check out the repository
+              uses: actions/checkout@v7
+            
+            - name: setup python
+              uses: actions/setup-python@v7
+              with:
+                cache: pip
+                python-version: "3.9.22"
+            
+            - name: Install dependencies
+              run: |
+                python -m pip install --upgrade pip
+                python -m pip install -r requirements/requirements.txt
+
+            - name: run lint checks
+              run: python -m ruff check --fix loan-amount-model-api/
+
+            - name: run test
+              run: python -m pytest -v loan-amount-model-api/tests/
+
+            - name: Generate coverage report
+              run: |
+                python -m pytest \
+                --cov=test_api \
+                --cov-report=term-missing \
+                --cov-report=html
+
+            - name: Upload coverage report
+              uses: actions/upload-artifact@v7
+              with:
+                name: coverage-for-prediction-api
+                path: htmlcov/
+                if-no-files-found: error
