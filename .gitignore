@@ -1,8 +1,8 @@
-/loanamount_env/
-/.venv
-/__pycache__/
-/.pytest_cache
-/.mypy_cache
-/.env
+loanamount_env/
+.venv/
+__pycache__/
+.env
 *.pyc
-/.vscode
+.vscode/
+.pytest_cache/
+.mypy_cache/
