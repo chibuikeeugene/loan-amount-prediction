@@ -1,0 +1,45 @@
+name: loan-service-cd-workflow
+
+on:
+    push:
+        branches: 
+            main
+    pull_request:
+        branches: 
+            main
+
+permissions: 
+    contents: read
+
+jobs:
+    build-image-app:
+        name: Build application image
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - name: checkout repository
+              uses: actions/checkout@v7
+            
+            - name: build the container image
+              run: docker build -t loan-service-app:test .
+
+    test-container-app:
+        name: run test on container application
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - name: start the container
+              run: |
+                docker run -d \
+                --name loan-service \
+                -p 88:8001 \
+                loan-service-app:test
+
+            - name: Await the container
+              run: python test-modules/container-test.py
+
+            - name: test the health endpoint
+              run: python test-modules/health-test.py
+
+            - name: test the prediction endpoint
+              run: python test-modules/pred-test.py
