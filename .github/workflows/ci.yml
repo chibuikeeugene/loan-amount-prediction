@@ -13,7 +13,7 @@ permissions:
 
 jobs:
     quality-check-tests:
-        name: Code quality and linting checks
+        name: Code quality, linting checks and test
         runs-on: ubuntu-latest
         timeout-minutes: 10
         steps:
