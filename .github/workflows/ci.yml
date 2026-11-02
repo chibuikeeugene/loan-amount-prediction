@@ -32,7 +32,7 @@ jobs:
                 python -m pip install -r requirements/requirements.txt
 
             - name: run lint checks
-              run: python -m ruff check --fix loan-amount-model-api/
+              run: python -m ruff check --no-fix --target-version py39 loan-amount-model-api/
 
             - name: run test
               run: python -m pytest -v loan-amount-model-api/tests/
