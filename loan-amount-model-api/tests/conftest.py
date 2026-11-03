@@ -11,7 +11,12 @@ from app.main import app
 
 @pytest.fixture(scope="module")
 def test_data() -> pd.DataFrame:
-    return load_dataset(filename=config.app_configs.test_data)
+    data =  load_dataset(filename=config.app_configs.test_data)
+    print("Ninth record:", data.iloc[8].to_dict())
+    print("Self-employed values:")
+    print(data["self_employed"].value_counts(dropna=False))
+
+    return data
 
 
 @pytest.fixture()
