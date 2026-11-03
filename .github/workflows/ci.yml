@@ -39,8 +39,8 @@ jobs:
 
             - name: Generate coverage report
               run: |
-                python -m pytest \
-                --cov=test_api \
+                python -m pytest loan-amount-model-api/tests/ \
+                --cov=loan-amount-model-api/app/ \
                 --cov-report=term-missing \
                 --cov-report=html
 
