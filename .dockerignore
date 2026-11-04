@@ -5,3 +5,9 @@ poetry.lock
 *.png
 mlartifacts/
 .vscode
+.gitignore
+.vscode/
+evidently_monitoring_and_evaluation/
+loanamount_env/
+research/
+prefect_batch_deployment_and_orchestration/
