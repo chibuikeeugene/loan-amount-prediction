@@ -10,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  build-image-app:
-    name: Build application image
+  build-image-and-test-container-app:
+    name: Build application image and run test on container application
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -21,11 +21,6 @@ jobs:
       - name: build the container image
         run: docker build -t loan-service-app:test .
 
-  test-container-app:
-    name: run test on container application
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
       - name: start the container
         run: |
           docker run -d \
