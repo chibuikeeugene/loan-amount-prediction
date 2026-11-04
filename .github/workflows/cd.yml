@@ -38,8 +38,8 @@ jobs:
       - name: Container startup test
         run: python test-modules/container-test.py
 
-      # - name: test the health endpoint
-      #   run: python test-modules/health-test.py
+      - name: test the health endpoint
+        run: python test-modules/health-test.py
 
       # - name: test the prediction endpoint
       #   run: python test-modules/pred-test.py
