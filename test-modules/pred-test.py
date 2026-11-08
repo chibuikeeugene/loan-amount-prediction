@@ -1,8 +1,6 @@
 import requests
 from requests.exceptions import HTTPError
-from pathlib import Path
 
-from sklearn.multiclass import OutputCodeClassifier
 
 test_data = {
                 "loan_id": "lp001003",
