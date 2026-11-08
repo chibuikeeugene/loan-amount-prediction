@@ -29,7 +29,10 @@ jobs:
           loan-service-app:test
 
       - name: Container startup test
-        run: python test-modules/container-test.py
+        run: |
+          curl -fsS http://127.0.0.1:88/openapi.json \
+          | python -c 'import json, sys; print("\n".join(json.load(sys.stdin)["paths"]))'
+          python test-modules/container-test.py
 
       # - name: test the health endpoint
       #   run: python test-modules/health-test.py

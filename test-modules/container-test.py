@@ -5,10 +5,10 @@ import subprocess
 from pathlib import Path
 
 
-url = "http://0.0.0.0:8001/health"
+url = "http://127.0.0.1:88/health"
 
 # checking for container startup initiation
-for attempt in range(1, 10):
+for attempt in range(1, 11):
     try:
         with urlopen(url, timeout=10) as response:
             result = response.read()
