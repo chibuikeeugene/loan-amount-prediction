@@ -1,0 +1,99 @@
+name: loan-service-release-workflow
+
+on:
+    release:
+        types: [published]
+
+permissions: 
+    contents: read
+
+env:
+    REGISTRY: ghcr.io
+    IMAGE_NAME: ${{github.repository}}
+
+jobs:
+    publish:
+        name: Published version image
+        runs-on: ubuntu-24.04
+        timeout-minutes: 10
+        permissions:
+            contents: read
+            packages: write
+        steps:
+            - name: checkout repository
+              uses: actions/checkout@v7
+
+            - name: setup docker buildx
+              uses: docker/setup-buildx-action@v4
+
+            - name: login to ghrc.io
+              uses: docker/login-action@v4
+              with:
+                registry: ${{env.REGISTRY}}
+                username: ${{github.actor}}
+                password: ${{secrets.GITHUB_TOKEN}}
+
+            - name: generate release metadata
+              id: metadata
+              uses: docker/metadata-action@v6
+              with:
+                images: ${{env.REGISTRY}}/${{env.IMAGE_NAME}}
+                tags: |
+                    type=semver,pattern={{version}},value=${{github.event.release.tag_name}}
+                    type=semver,pattern={{major}}.{{minor}},value=${{github.event.release.tag_name}}
+                    type=semver,pattern={{major}},value=${{github.event.release.tag_name}}
+                    type=sha,prefix=sha-
+
+            - name: build and push image
+              uses: docker/build-push-action@v7
+              with:
+                context: .
+                push: true
+                tags: ${{steps.metadata.outputs.tags}}
+                labels: ${{steps.metadata.outputs.labels}}
+
+    staging:
+        name: verify release on staging
+        needs:
+            - publish
+        runs-on: ubuntu-24.04
+        timeout-minutes: 10
+        permissions: 
+            contents: read
+            packages: read
+        environment: 
+            name: staging
+        steps:
+          - name: determine the release version
+            id: version
+            shell: bash
+            run: |
+                VERSION = "${GITHUB_REF_NAME#v}"
+                echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+        
+          - name: pull the release image
+            run: |
+                echo "Release tag: ${{github.event.release.tag_name}}"
+                docker pull \
+                "${{env.REGISTRY}}/${{env.IMAGE_NAME}}:${{steps.version.outputs.version}}"
+
+          - name: start the release container
+            run: |
+                docker run \
+                -d \
+                --name release-test \
+                -p 88:8001 \
+                "${{env.REGISTRY}}/${{env.IMAGE_NAME}}:${{steps.version.outputs.version}}"
+
+          - name: smoke test the staging release
+            run: python test-modules/container-test.py
+
+          - name: show environment used to test release container
+            run: echo "Environment= ${{vars.DEPLOYMENT_TIER}}"
+
+          - name: cleanup
+            if: always()
+            run: docker rm --force release-test
+
+
+            
