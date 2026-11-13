@@ -1,8 +1,6 @@
 name: loan-service-cd-workflow
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
@@ -12,7 +10,7 @@ permissions:
 jobs:
   build-image-and-test-container-app:
     name: Build application image and run test on container application
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - name: checkout repository
