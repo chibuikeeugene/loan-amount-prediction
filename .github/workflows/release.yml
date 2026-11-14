@@ -64,6 +64,9 @@ jobs:
     environment:
       name: staging
     steps:
+      - name: checkout repository
+        uses: actions/checkout@v7
+
       - name: determine the release version
         id: version
         shell: bash
@@ -94,3 +97,30 @@ jobs:
       - name: cleanup
         if: always()
         run: docker rm --force release-test
+
+  production:
+    name: promote release to production
+    needs:
+      - staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment:
+      name: production
+    steps:
+      - name: verify production environment
+        env:
+          DEPLOYMENT_TIER: ${{vars.DEPLOYMENT_TIER}}
+        run: |
+          python - <<'PY'
+          import os
+          import sys
+
+          deployment_tier = os.getenv("DEPLOYMENT_TIER")
+          if not deployment_tier:
+            print('check environment setup')
+            sys.exit(1)
+          print(f"Target environment: {deployment_tier}")
+          print("Release approved for production")
+          print("Welcome aboard")
+          PY
+    
