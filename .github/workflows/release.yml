@@ -68,7 +68,7 @@ jobs:
         id: version
         shell: bash
         run: |
-          VERSION = "${GITHUB_REF_NAME#v}"
+          VERSION="${GITHUB_REF_NAME#v}"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: pull the release image
